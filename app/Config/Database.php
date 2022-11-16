@@ -32,17 +32,10 @@ class Database extends Config
      */
     public $default = [
         'DSN'      => '',
-<<<<<<< HEAD
-        'hostname' => '127.0.0.1:8080',
-        'username' => 'root',
-        'password' => '',
-        'database' => 'myblog_db',
-=======
-        'hostname' => 'localhost',
+        'hostname' => '127.0.0.1',
         'username' => 'root',
         'password' => '',
         'database' => 'ci4_api',
->>>>>>> update
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,

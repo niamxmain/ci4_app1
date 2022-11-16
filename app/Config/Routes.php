@@ -2,6 +2,8 @@
 
 namespace Config;
 
+use App\Controllers\Product;
+
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -35,12 +37,12 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-<<<<<<< HEAD
+
 // $routes->get('/', 'Home::index');
-$routes->get('/', 'PostController::tampilPost');
-=======
-$routes->get('/', 'Home::index');
->>>>>>> update
+
+// $routes->get('/', 'Home::index');
+$routes->get('/', 'Product::index');
+$routes->resource('product');
 
 /*
  * --------------------------------------------------------------------

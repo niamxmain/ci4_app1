@@ -17,8 +17,10 @@ class Product extends BaseController
     }
     public function index()
     {
-        $data['produk'] = $this->model->orderBy('id', 'desc')->findAll();
-        return $this->respond($data);
+        // $data['produk'] = $this->model->orderBy('id', 'desc')->findAll();
+        $data['produk'] = $this->model->findAll();
+        // return $this->respond($data);
+        return view('produk_view', $data);
     }
 
     public function create()
@@ -43,6 +45,42 @@ class Product extends BaseController
         $data = $this->model->where('id', $id)->first();
         if ($data) {
             return $this->respond($data);
+        } else {
+            return $this->failNotFound('Data tidak ditemukan');
+        }
+    }
+
+    public function update($id = null)
+    {
+        $id = $this->request->getVar('id');
+        $data = [
+            'nama_produk' => $this->request->getVar('nama_produk'),
+            'harga' => $this->request->getVar('harga')
+        ];
+        $this->model->update($id, $data);
+        $response = [
+            'status' => 200,
+            'error' => null,
+            'message' => [
+                'success' => 'Data produk berhasil diupdate'
+            ]
+        ];
+        return $this->respondUpdated($response);
+    }
+
+    public function delete($id = null)
+    {
+        $data = $this->model->where('id', $id)->delete($id);
+        if ($data) {
+            $this->model->delete($id);
+            $response = [
+                'status' => 200,
+                'error' => null,
+                'message' => [
+                    'success' => 'Data produk berhasil dihapus',
+                ]
+            ];
+            return $this->respondDeleted($response);
         } else {
             return $this->failNotFound('Data tidak ditemukan');
         }
